@@ -56,8 +56,8 @@
 
 1.  Склонируйте репозиторий:
     ```bash
-    git clone <repository-url>
-    cd passplease
+    git clone https://github.com/Ser4ey/FEFU2025_PassPlease
+    cd FEFU2025_PassPlease
     ```
 2.  Убедитесь, что у вас установлен **Node.js** для работы с инструментами Kha.
 3.  Запустите сборку через Kha (используя `khamake`):
