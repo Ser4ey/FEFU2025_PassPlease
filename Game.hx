@@ -36,7 +36,7 @@ class Game {
 	public static var stats:Stats;
 
 	/**
-	 * Инициализирует игру, загружает статистику и настраивает переходы FSM.
+	 * Инициализация игры.
 	 * Вызывается при запуске приложения.
 	 */
 	public static function init() {
