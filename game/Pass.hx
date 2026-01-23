@@ -1,7 +1,7 @@
 package passplease.game;
 
 /**
- * Представляет идентификационный пропуск студента.
+ * Данный класс представляет идентификационный пропуск студента.
  * Содержит личную информацию и логику валидации.
  */
 class Pass {
@@ -30,7 +30,7 @@ class Pass {
 	 * 
 	 * @return `true`, если все критерии валидации соблюдены.
 	 */
-	public function isValid() {
+	public function isLegal() {
 		// dorm, faculty, idCardColor, passId
 		function checkPassId(passId:String):Bool {
 			var part1 = Std.parseInt(passId.substr(0, 3));

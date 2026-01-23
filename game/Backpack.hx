@@ -18,7 +18,7 @@ class Backpack {
 	 * 
 	 * @return `true`, если запрещенных предметов нет, иначе `false`.
 	 */
-	public function isValid() {
+	public function isLegal() {
 		for (backpackItem in this.items)
 			if (Generator.bannedItems.contains(backpackItem))
 				return false;

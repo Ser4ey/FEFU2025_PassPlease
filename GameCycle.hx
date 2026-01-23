@@ -6,7 +6,7 @@ import passplease.ui.UI;
 import passplease.game.Person;
 
 /**
- * Управляет основным игровым циклом, течением времени и очередью студентов.
+ * Данный класс управляет основным игровым циклом, течением времени и очередью студентов.
  * Отвечает за симуляцию "рабочего дня", включая временные лимиты и появление студентов.
  */
 class GameCycle {
@@ -62,12 +62,12 @@ class GameCycle {
 	 * Обновляет счет и счетчики ошибок в зависимости от правильности решения.
 	 * Переходит в состояние завершения, если все студенты обработаны.
 	 * 
-	 * @param isValid Решение игрока: `true` (разрешить), `false` (отказать).
+	 * @param isLegal Решение игрока: `true` (разрешить), `false` (отказать).
 	 */
-	public static function processPerson(isValid:Bool) {
+	public static function processPerson(isLegal:Bool) {
 		var student = students.shift();
-		var studentIsValid = student.pass.isValid() && (Game.stats.badge > 10 ? student.backpack.isValid() : true);
-		if (studentIsValid != isValid) {
+		var studentIsValid = student.pass.isLegal() && (Game.stats.badge > 10 ? student.backpack.isLegal() : true);
+		if (studentIsValid != isLegal) {
 			score -= 10 + Game.stats.badge;
 			mistakes.push(student);
 		} else
