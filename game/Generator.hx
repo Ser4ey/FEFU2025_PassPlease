@@ -83,9 +83,11 @@ class Generator {
 		"Prokhorovna",     "Matveyevna",   "Ignatyevna",     "Afanasevna",     "Denisovna"
 	];
 
-	public static var dorms = [
+	public static var currentDorm: String = '6.2';
+
+	public static var otherDorms = [
 		'1.1', '1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8', '1.9', '1.10', '1.11', '1.12', '2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7', '3', '4', '5',
-		'6.1', '6.2', '7.1', '7.2', '8.1', '8.2', '9', '10', '11'
+		'6.1', '7.1', '7.2', '8.1', '8.2', '9', '10', '11'
 	];
 
 	public static var facultyCodes:Map<String, String> = [
@@ -128,6 +130,8 @@ class Generator {
 	public static function getFullName(gender:String) {
 		var fullName:Map<String, String> = [];
 
+		fullName.set("gender", gender);
+
 		if (gender == "Male") {
 			fullName.set("surname", maleSurnames[Std.random(maleSurnames.length)]);
 			fullName.set("name", maleNames[Std.random(maleNames.length)]);
@@ -151,21 +155,16 @@ class Generator {
 
 	/**
 	 * Выбирает номер общежития.
-	 * Имеет шанс вернуть правильное общежитие ('6.2') или неправильное.
+	 * Имеет шанс вернуть неправильное общежитие.
 	 */
 	public static function getDorm() {
-		var randomNumber:Int = Generator.randomMistake(); // 0..9
+		var randomNumber:Int = Generator.randomMistake();
+
 		var dorm:String = '';
 		if (randomNumber > 10) {
 			dorm = '6.2';
 		} else {
-			while (true) {
-				dorm = Generator.dorms[Std.random(Generator.dorms.length)];
-				if (dorm == '6.2')
-					continue;
-				else
-					break;
-			}
+			dorm = Generator.otherDorms[Std.random(Generator.otherDorms.length)];
 		}
 		return dorm;
 	}
@@ -204,7 +203,8 @@ class Generator {
 	 */
 	public static function generatePassId(fullName:Map<String, String>):String {
 		if (Generator.randomMistake() > 95)
-			fullName = Generator.getFullName("Male");
+			fullName = Generator.getFullName(fullName['gender'] == "Male" ? "Female" : "Male");
+
 		var part2 = '${fullName['surname'].toUpperCase()}${fullName['name'].toUpperCase().substr(0, 1)}${fullName['patronymics'].toUpperCase().substr(0, 2)}';
 		return Std.random(900) + 100 + part2;
 	}
